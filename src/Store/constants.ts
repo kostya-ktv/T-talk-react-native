@@ -1,0 +1,16 @@
+//AUTH ACTIONS
+
+export const LOGIN_ACTION = 'LOGIN_ACTION'
+export const REGISTRATION_ACTION = 'REGISTRATION_ACTION_ACTION'
+export const LOGOUT_ACTION = 'LOGOUT_ACTION'
+export const CHECK_AUTH_ACTION = 'CHECK_AUTH'
+
+//ROOM ACTIONS 
+
+export const JOIN_ROOM_ACTION = 'JOIN_ROOM'
+export const FETCH_ROOMS_ACTION = 'FETCH_ROOMS_ACTION'
+
+//API
+export const API_URL = `http://192.168.1.21:7000/api`
+export const API_CHAT = `http://192.168.1.21:7000/`
+
