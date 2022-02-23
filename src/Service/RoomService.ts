@@ -13,8 +13,8 @@ export const joinRoom = async (room: string, nickname: string): Promise<AxiosRes
 }
 
 //FETCH ALL USER ROOMS
-export const fetchRooms = async(userid: number)=> {
-   return await API.get(`${API_URL}/rooms/${userid}`, {withCredentials: true})
+export const fetchRooms = async(userid: number): Promise<AxiosResponse<RoomResponseType>> => {
+   return await API.get<RoomResponseType>(`${API_URL}/rooms/${userid}`, {withCredentials: true})
 }
 //FETCH ALL USER ROOMS
 export const deleteRoom = async(id: string) => {

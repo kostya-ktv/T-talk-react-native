@@ -4,7 +4,8 @@ export const showNotification = (message: string, type: "danger" | "info" | "suc
    showMessage({
    message: message,
    type: type,
-   position: {top: 80},
-   description: description
+   position: {top: 90},
+   description: description,
+   duration: 4000
  })
 }

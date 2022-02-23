@@ -6,6 +6,7 @@ import StartScreen from "./src/Screens/StartScreen/StartScreen";
 import { GlobalStateType } from "./src/Store/types";
 import RoomScreen from "./src/Screens/RoomScreen/RoomScreen";
 import FlashMessage from "react-native-flash-message";
+import ChatScreen from "./src/Screens/ChatScreen/ChatScreen";
 
 const RootNavigation = () => {
   const Stack = createStackNavigator();
@@ -29,6 +30,7 @@ const RootNavigation = () => {
         :
          <Stack.Navigator initialRouteName="/" screenOptions={screenOptions}>
             <Stack.Screen name="/" component={RoomScreen}/>
+            <Stack.Screen name="/chat" component={ChatScreen}/>
          </Stack.Navigator>
       }
         </NavigationContainer>

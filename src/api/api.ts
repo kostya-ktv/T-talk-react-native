@@ -10,12 +10,8 @@ const API = axios.create({
 })
 
 //INTERCEPTOR FOR REQUEST SET 
-API.interceptors.request.use((config: any) => {
-   console.log('TOKEN');
-   
-   console.log(AsyncStorage.getItem('token').then(res => console.log(res)));
-   
-   config.headers.Authorization = `Bearer ${AsyncStorage.getItem('token')}`;
+API.interceptors.request.use( async (config: any) => {
+   config.headers.Authorization = `Bearer ${await AsyncStorage.getItem('token')}`;
    return config;
 })
 
@@ -31,7 +27,7 @@ API.interceptors.response.use(config => {
       originalRequest._isRetry = true;
       const response = await axios.get<AuthResponse>(`${API_URL}/refresh`,{withCredentials: true})
       //with the successful refresh response, write a new access token in LS
-      AsyncStorage.setItem('token', response.data.accessToken);
+      await AsyncStorage.setItem('token', response.data.accessToken);
       //repeat the main request
       return API.request(originalRequest);
    }

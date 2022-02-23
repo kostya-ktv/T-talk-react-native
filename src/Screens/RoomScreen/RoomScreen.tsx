@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React, { FC, useEffect } from "react";
 import { ImageBackground, StyleSheet, View, Text} from "react-native"
-
 import RoomOverlay from "../../Components/RoomOverlay/RoomOverlay";
 //@ts-ignore
 import bg from '../../../assets/bgblur.png'
@@ -9,17 +8,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { GlobalStateType } from "../../store/types";
 import { showNotification } from "../../Util";
 import { getRooms_action } from "../../Store/actions/room-actions";
-import { fetchRooms } from "../../Service/RoomService";
+import ListRooms from "../../Components/ListRooms/ListRooms";
 
 const RoomScreen = () => {
-   const dispatch = useDispatch();
-   const auth = useSelector((state: GlobalStateType) => state.auth);
+   const dispatch = useDispatch()
+   const auth = useSelector((state: GlobalStateType) => state.auth)
    const myRooms = useSelector((state:GlobalStateType) => state.room)
- 
-   useEffect( () => {
 
-      fetchRooms(auth.user.id)
-      !auth.user.isactivated && showNotification("Welcome","success",'Registration successfull')
+   useEffect( () => {
+      getRooms_action(auth.user.id, dispatch)
+      !auth.user.isactivated && showNotification("Hi","info",'To create rooms, your email must be verified')
    }, [])
    
    return (
@@ -33,7 +31,7 @@ const RoomScreen = () => {
                <RoomOverlay label="🔌 JOIN ROOM" action="Join"/>
                <Text style={styles.logout} onPress={() => userLogout_action(dispatch)}>👋 Logout</Text>
             </View>
-            
+            <ListRooms rooms={myRooms} user={auth.user}/>       
          </ImageBackground>
       </View>
       

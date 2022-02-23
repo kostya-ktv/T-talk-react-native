@@ -9,14 +9,14 @@ import { showNotification } from "../../Util";
 export const login_action = async(email: string, password: string, dispatch: Dispatch, onBackdropPress: ()=>void) => {
    
       await login(email, password)
-         .then((res) => {
+         .then(async (res) => {
             if (res === undefined) throw Error('')
-            AsyncStorage.setItem('token', res.data.accessToken)
+            await AsyncStorage.setItem('token', res.data.accessToken)
             dispatch({ type: LOGIN_ACTION, payload: res.data.user })
             showNotification("Welcome","success",'Successful login')
          })
-         .catch(error => {
-            AsyncStorage.removeItem('token');
+         .catch(async (error) => {
+            await AsyncStorage.removeItem('token');
             showNotification("Access denied","danger",'Invalid credentials')
              onBackdropPress();
          })
@@ -26,14 +26,14 @@ export const login_action = async(email: string, password: string, dispatch: Dis
 export const registation_action = async(email: string, password: string, dispatch: Dispatch, onBackdropPress: ()=>void) => {
 
      await registation(email, password)
-      .then((res) => {
+      .then(async (res) => {
          if (res === undefined) throw Error('')
-         AsyncStorage.setItem('token', res.data.accessToken);
+         await AsyncStorage.setItem('token', res.data.accessToken);
          dispatch({ type: REGISTRATION_ACTION, payload: res?.data.user })
          showNotification("Welcome","success", 'Successfull registration');
        })
-       .catch(error => {
-         AsyncStorage.removeItem('token');
+       .catch(async(error) => {
+         await AsyncStorage.removeItem('token');
          showNotification("Access denied","danger",'Invalid credentials or email already exists')
           onBackdropPress();
       })
@@ -44,9 +44,9 @@ export const registation_action = async(email: string, password: string, dispatc
 export const userLogout_action = async(dispatch: Dispatch) => {
    try {
       await logout().then(() => dispatch({ type: LOGOUT_ACTION }))
-      AsyncStorage.removeItem('token');
+      await AsyncStorage.removeItem('token');
    } catch (error) {
-      AsyncStorage.removeItem('token');
+      await AsyncStorage.removeItem('token');
       console.log(error);    
    }
 }
@@ -54,10 +54,10 @@ export const userLogout_action = async(dispatch: Dispatch) => {
 export const checkAuth_action = async () => {
    try {
       const response = await axios.get<AuthResponse>(`${API_URL}/refresh`,{withCredentials: true})
-      AsyncStorage.setItem('token', response.data.accessToken);
+      await AsyncStorage.setItem('token', response.data.accessToken);
       return response;
    } catch (error) {
-      AsyncStorage.removeItem('token');
+      await AsyncStorage.removeItem('token');
       console.log(error);  
    }
    

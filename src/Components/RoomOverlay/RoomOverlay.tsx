@@ -24,7 +24,7 @@ const RoomOverlay: React.FunctionComponent<OverlayComponentProps> = ({label, act
       </TouchableOpacity>
 
       <Overlay isVisible={visible} onBackdropPress={toggleOverlay}>
-          <RoomForm label={label}/>
+          <RoomForm label={label} action={action} toggle={toggleOverlay}/>
       </Overlay>
 
     </View>

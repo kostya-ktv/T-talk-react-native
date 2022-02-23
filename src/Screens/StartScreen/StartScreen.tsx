@@ -3,7 +3,7 @@ import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from
 import LoginOverlay from "../../Components/LoginOverlay/LoginOverlay"
 //@ts-ignore
 import bg from '../../../assets/bgblur.png'
-import SignUpScreen from "../SingUpScreen/SignUpScreen"
+
 //@ts-ignore
 import logo from '../../../assets/logo.png'
 
@@ -32,12 +32,7 @@ const StartScreen:FC = () => {
       
    )
 }
-//@ts-ignore
-SignUpScreen.navigationOptions = () => {
-   return {
-      header: null
-   }
-}
+
 const styles = StyleSheet.create({
    box: {
       flex: 1,
